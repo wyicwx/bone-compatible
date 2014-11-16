@@ -37,7 +37,7 @@ function comp(mod, context) {
 				return origin(cachedFile[file]);
 			} else {
 				var args = _.toArray(arguments);
-				return bone.fs.createReadStream.apply(bone, args);
+				return bone.fs.createReadStream.apply(bone.fs, args);
 			}
 		};
 		bonefs.readdir = function(p, callback) {
