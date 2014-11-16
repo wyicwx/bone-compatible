@@ -18,7 +18,7 @@ function comp(mod, context) {
 		var module = cache[mod] = rewire(mod);
 		var bonefs = _.clone(fs);
 		bonefs.readFile = function(file, encoding, callback) {
-			if(bone.fs.exists(file, {notFs: true})) {
+			if(bone.fs.existFile(file, {notFs: true})) {
 				file = bone.fs.pathResolve(file);
 				if(cachedFile[file]) {
 					callback(null, buffer);
@@ -41,15 +41,12 @@ function comp(mod, context) {
 			}
 		};
 		bonefs.readdir = function(p, callback) {
-			var result = bone.fs.search(path.join(p, '*'));
-			var result = result.map(function(file) {
-				return path.relative(p, file);
-			});
+			var result = bone.fs.readDir(p);
 			callback(null, result);
 		};
 		bonefs.stat = function(file, callback) {
 			file = bone.fs.pathResolve(file);
-			var isFile = bone.fs.exists(file, {notFs: true});
+			var isFile = bone.fs.existFile(file, {notFs: true});
 			var isDir = bone.fs.search(file, {notFs: true}).length > 0;
 			var args = _.toArray(arguments);
 			var dir = isFile ? path.dirname(file) : file;
