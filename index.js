@@ -66,6 +66,11 @@ function comp(mod, context) {
 						}, 50);
 						bonefileStat.size = buffer.length;
 						callback(null, bonefileStat);
+					}).on('end', function() {
+						if(!cachedFile[file]) {
+							bonefileStat.size = 0;
+							callback(null, bonefileStat);
+						}
 					});
 				}
 			} else if(isDir) {
