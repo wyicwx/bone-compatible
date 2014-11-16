@@ -37,7 +37,7 @@ function comp(mod, context) {
 				return origin(cachedFile[file]);
 			} else {
 				var args = _.toArray(arguments);
-				return bone.createReadStream.apply(bone, args);
+				return bone.fs.createReadStream.apply(bone, args);
 			}
 		};
 		bonefs.readdir = function(p, callback) {
@@ -58,7 +58,7 @@ function comp(mod, context) {
 						bonefs.stat(file, callback);
 					});
 				} else {
-					AKOStream.aggre(bone.createReadStream(file)).on('data', function(buffer) {
+					AKOStream.aggre(bone.fs.createReadStream(file)).on('data', function(buffer) {
 						// todo cache buffer  
 						cachedFile[file] = buffer;
 						setTimeout(function() {
