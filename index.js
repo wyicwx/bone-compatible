@@ -3,7 +3,7 @@ var cache = {};
 var _ = require('underscore');
 var fs = require('fs');
 var path = require('path');
-var AKOStream = require('AKOStream');
+var AKOStream = require('akostream');
 var origin = AKOStream.origin;
 
 function comp(mod, context, vfs) {
